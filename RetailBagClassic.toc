@@ -1,0 +1,12 @@
+## Interface: 11304
+## Title: RetailBagClassic
+## Notes: Retail Bag for Classic
+## Author: Eterion
+## Version: 0.1.0
+
+# Free Slots
+FreeSlots/FreeSlots.lua
+
+# Search Box
+SearchBox/SearchBox.lua
+SearchBox/SearchBox.xml
