@@ -35,7 +35,6 @@ end
 local function RegisterEvents()
     EventFrame:SetScript("OnEvent", OnEvent)
     EventFrame:RegisterEvent("BAG_UPDATE")
-    EventFrame:RegisterEvent("PLAYER_LOGIN")
 end
 
 -- Init
