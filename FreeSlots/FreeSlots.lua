@@ -1,7 +1,7 @@
 -- Event frame
 local EventFrame = CreateFrame("Frame")
 
--- Label string
+-- Label frame
 local FreeSlotsLabel = MainMenuBarBackpackButton:CreateFontString("FreeSlotsLabel", "OVERLAY", "GameTooltipText")
 FreeSlotsLabel:SetFont("Fonts\\ARIALN.TTF", 14, "THINOUTLINE")
 FreeSlotsLabel:SetPoint("BOTTOM", 0, 3)
@@ -12,7 +12,7 @@ local function CountFreeSlots()
     local totalFreeSlots = 0
     for i = 0, NUM_BAG_SLOTS do
         local freeSlots, bagType = GetContainerNumFreeSlots(i)
-        if bagType == 0 then
+        if (bagType == 0) then
             totalFreeSlots = totalFreeSlots + freeSlots
         end
     end
@@ -26,7 +26,7 @@ end
 
 -- Event hook
 local function OnEvent(self, event, bagId)
-    if bagId >= 0 and bagId <= NUM_BAG_SLOTS then
+    if (bagId >= 0 and bagId <= NUM_BAG_SLOTS) then
         UpdateLabel()
     end
 end
