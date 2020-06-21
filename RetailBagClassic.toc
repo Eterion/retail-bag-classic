@@ -1,12 +1,12 @@
 ## Interface: 11304
 ## Title: RetailBagClassic
+## SavedVariablesPerCharacter: bagSlotFlags, bagAutoSortDisabled
 ## Notes: Retail Bag for Classic
 ## Author: Eterion
 ## Version: 0.1.0
 
+# Bag Sort
+BagSort/BagSort.xml
+
 # Free Slots
 FreeSlots/FreeSlots.lua
-
-# Search Box
-SearchBox/SearchBox.lua
-SearchBox/SearchBox.xml
