@@ -161,3 +161,19 @@ for i = 1, NUM_BAG_SLOTS + NUM_BANKBAGSLOTS do
     CreateFrame("Frame", "$parentFilterDropdown", ContainerFrame, "FilterDropDownTemplate")
     UIDropDownMenu_Initialize(ContainerFrame.FilterDropDown, ContainerFrameFilterDropDown_Initialize, "MENU")
 end
+
+-- Hide BankFrame "Item Slots" FontString
+for i, child in ipairs({ BankFrame:GetRegions() }) do
+    if (i == 4) then
+        child:Hide()
+    end
+end
+
+hooksecurefunc("UpdateBagSlotStatus", function (self)
+    local numSlots, full = GetNumBankSlots()
+    if (full) then
+        BankDepositReagentsButton:Show()
+    else
+        BankDepositReagentsButton:Hide()
+    end
+end)

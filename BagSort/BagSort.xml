@@ -77,6 +77,16 @@
         <Anchors>
             <Anchor point="TOPRIGHT" x="-92" y="-45"/>
         </Anchors>
+        <Layers>
+            <Layer level="BACKGROUND" textureSubLevel="-1">
+                <Texture file="Interface\BankFrame\Bank-Background" horizTile="true" vertTile="true">
+                    <Size x="110" y="20" />
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="0" y="0" />
+                    </Anchors>
+                </Texture>
+            </Layer>
+        </Layers>
     </EditBox>
 
     <Button name="BankItemAutoSortButton" parent="BankFrame">
@@ -99,6 +109,18 @@
 				GameTooltip:Show();
 			</OnEnter>
             <OnLeave function="GameTooltip_Hide"></OnLeave>
+        </Scripts>
+    </Button>
+
+    <Button name="BankDepositReagentsButton" parent="BankFrame" inherits="UIPanelButtonTemplate" text="REAGENTBANK_DEPOSIT" hidden="true">
+        <Size x="256" y="24" />
+        <Anchors>
+            <Anchor point="CENTER" relativePoint="CENTER" x="-15" y="-100" />
+        </Anchors>
+        <Scripts>
+            <OnClick>
+                PlaySound(SOUNDKIT.IG_MAINMENU_OPTION)
+            </OnClick>
         </Scripts>
     </Button>
 
