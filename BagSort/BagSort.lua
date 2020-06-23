@@ -189,10 +189,11 @@ for i = 1, NUM_BAG_SLOTS + NUM_BANKBAGSLOTS do
     UIDropDownMenu_Initialize(ContainerFrame.FilterDropDown, ContainerFrameFilterDropDown_Initialize, "MENU")
 end
 
--- Hide BankFrame "Item Slots" FontString
 for i, child in ipairs({ BankFrame:GetRegions() }) do
     if (i == 4) then
-        child:Hide()
+        child:ClearAllPoints()
+        child:SetPoint("TOPLEFT", 80, -48)
+        child:SetJustifyH("LEFT")
     end
 end
 
