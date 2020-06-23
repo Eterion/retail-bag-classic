@@ -124,6 +124,9 @@ end
 local function ContainerFramePortraitButton_OnEnter(self)
     local parent = self:GetParent()
     local id = parent:GetID()
+    if (id < 0) then
+        return
+    end
     self.Highlight:Show()
     if (id > 0) then
         if (parent.localFlag and BAG_FILTER_LABELS[parent.localFlag]) then
@@ -144,9 +147,10 @@ end
 local function ContainerFramePortraitButton_OnLeave(self)
     local parent = self:GetParent()
     local id = parent:GetID()
-    if (id >= 0) then
-        self.Highlight:Hide()
+    if (id < 0) then
+        return
     end
+    self.Highlight:Hide()
 end
 
 local function ContainerFramePortraitButton_OnClick(self)
