@@ -1,6 +1,6 @@
 ## Interface: 11304
 ## Title: RetailBagClassic
-## SavedVariablesPerCharacter: bagSlotFlags, bagAutoSortDisabled
+## SavedVariablesPerCharacter: BankAutosortDisabled, BackpackAutosortDisabled
 ## Notes: Retail Bag for Classic
 ## Author: Eterion
 ## Version: 0.1.0
