@@ -1,0 +1,19 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <EditBox name="BankItemSearchBox" inherits="BagSearchBoxTemplate" parent="BankFrame" letters="15">
+        <Size x="110" y="20"/>
+        <Anchors>
+            <Anchor point="TOPRIGHT" x="-92" y="-45"/>
+        </Anchors>
+        <Layers>
+            <Layer level="BACKGROUND" textureSubLevel="-1">
+                <Texture file="Interface\BankFrame\Bank-Background" horizTile="true" vertTile="true">
+                    <Size x="110" y="20" />
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="0" y="0" />
+                    </Anchors>
+                </Texture>
+            </Layer>
+        </Layers>
+    </EditBox>
+</Ui>

@@ -1,22 +1,3 @@
-BankAutosortDisabled = nil
-BackpackAutosortDisabled = nil
-
-local function SetBankAutosortDisabled(value)
-    BankAutosortDisabled = value
-end
-
-local function SetBackpackAutosortDisabled(value)
-    BackpackAutosortDisabled = value
-end
-
-local function GetBankAutosortDisabled()
-    return BankAutosortDisabled
-end
-
-local function GetBackpackAutosortDisabled()
-    return BackpackAutosortDisabled
-end
-
 -- Filters
 BAG_FILTER_LABELS = {
     [LE_BAG_FILTER_FLAG_EQUIPMENT] = BAG_FILTER_EQUIPMENT,
@@ -32,6 +13,7 @@ BAG_FILTER_ICONS = {
 	[LE_BAG_FILTER_FLAG_TRADE_GOODS] = "bags-icon-tradegoods",
 }
 
+-- Initialize bag filter dropdown
 local function ContainerFrameFilterDropDown_Initialize(self)
     local parent = self:GetParent()
     local id = parent:GetID()
@@ -121,6 +103,7 @@ local function ContainerFrameFilterDropDown_Initialize(self)
     UIDropDownMenu_AddButton(Ignore)
 end
 
+-- Update tooltip and show portrait highlight
 local function ContainerFramePortraitButton_OnEnter(self)
     local parent = self:GetParent()
     local id = parent:GetID()
@@ -144,6 +127,7 @@ local function ContainerFramePortraitButton_OnEnter(self)
     GameTooltip:Show()
 end
 
+-- Hide portrait highlight
 local function ContainerFramePortraitButton_OnLeave(self)
     local parent = self:GetParent()
     local id = parent:GetID()
@@ -153,6 +137,7 @@ local function ContainerFramePortraitButton_OnLeave(self)
     self.Highlight:Hide()
 end
 
+-- Show bag filter dropdown
 local function ContainerFramePortraitButton_OnClick(self)
     local parent = self:GetParent()
     local id = parent:GetID()
@@ -163,21 +148,24 @@ local function ContainerFramePortraitButton_OnClick(self)
     end
 end
 
+-- Register portrait button events
 local function RegisterPortraitButtonEvents(PortraitButton)
     PortraitButton:HookScript("OnEnter", ContainerFramePortraitButton_OnEnter)
     PortraitButton:HookScript("OnLeave", ContainerFramePortraitButton_OnLeave)
     PortraitButton:HookScript("OnClick", ContainerFramePortraitButton_OnClick)
 end
 
+-- Add frames to bags
 for i = 1, NUM_BAG_SLOTS + NUM_BANKBAGSLOTS do
     local ContainerFrame = _G["ContainerFrame"..i]
     RegisterPortraitButtonEvents(ContainerFrame.PortraitButton)
-    ContainerFrame.PortraitButton:CreateTexture(nil, "OVERLAY", "ContainerFramePortraitButtonHighlightTemplate")
+    ContainerFrame.PortraitButton:CreateTexture(nil, "OVERLAY", "PortraitButtonHighlightTemplate")
     CreateFrame("Button", nil, ContainerFrame, "FilterIconTemplate")
     CreateFrame("Frame", "$parentFilterDropdown", ContainerFrame, "FilterDropDownTemplate")
     UIDropDownMenu_Initialize(ContainerFrame.FilterDropDown, ContainerFrameFilterDropDown_Initialize, "MENU")
 end
 
+-- Move bank "Item Slots" string
 for i, child in ipairs({ BankFrame:GetRegions() }) do
     if (i == 4) then
         child:ClearAllPoints()
@@ -185,51 +173,3 @@ for i, child in ipairs({ BankFrame:GetRegions() }) do
         child:SetJustifyH("LEFT")
     end
 end
-
-hooksecurefunc("ContainerFrame_OnShow", function (self)
-    local id = self:GetID()
-    self.FilterIcon:Hide()
-    if (id > 0 and not IsInventoryItemProfessionBag("player", ContainerIDToInventoryID(id))) then
-        for i = LE_BAG_FILTER_FLAG_EQUIPMENT, NUM_LE_BAG_FILTER_FLAGS do
-            local active = false
-            if (id > NUM_BAG_SLOTS) then
-                active = GetBankBagSlotFlag(id - NUM_BAG_SLOTS, i)
-            else
-                active = GetBagSlotFlag(id, i)
-            end
-            if (active) then
-                self.FilterIcon.Icon:SetAtlas(BAG_FILTER_ICONS[i], true)
-                self.FilterIcon:Show()
-                break
-            end
-        end
-    end
-end)
-
-hooksecurefunc("ContainerFrame_Update", function (self)
-    local id = self:GetID()
-    local name = self:GetName()
-    local itemButton
-    local texture, itemCount, locked, quality, readable, _, itemLink, isFiltered, noValue, itemID
-    for i = 1, self.size do
-        itemButton = _G[name.."Item"..i]
-        texture, itemCount, locked, quality, readable, _, itemLink, isFiltered, noValue, itemID = GetContainerItemInfo(id, itemButton:GetID())
-
-        -- Junk
-        itemButton.JunkIcon:Hide()
-        local itemLocation = ItemLocation:CreateFromBagAndSlot(id, itemButton:GetID())
-        if C_Item.DoesItemExist(itemLocation) then
-            local isJunk = quality == LE_ITEM_QUALITY_POOR and not noValue and MerchantFrame:IsShown()
-            itemButton.JunkIcon:SetShown(isJunk)
-        end
-    end
-end)
-
-hooksecurefunc("UpdateBagSlotStatus", function (self)
-    local numSlots, full = GetNumBankSlots()
-    if (full) then
-        BankDepositReagentsButton:Show()
-    else
-        BankDepositReagentsButton:Hide()
-    end
-end)

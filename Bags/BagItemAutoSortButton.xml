@@ -1,0 +1,28 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <Button name="BagItemAutoSortButton" parent="ContainerFrame1">
+        <Size x="23" y="19" />
+		<NormalTexture atlas="bags-button-autosort-up"/>
+		<PushedTexture atlas="bags-button-autosort-down"/>
+		<HighlightTexture file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD">
+			<Size x="19" y="16"/>
+			<Anchors>
+				<Anchor point="CENTER" x="0" y="0"/>
+			</Anchors>
+		</HighlightTexture>
+        <Anchors>
+            <Anchor point="LEFT" relativeTo="BagItemSearchBox" relativePoint="RIGHT" x="0" y="-1"/>
+        </Anchors>
+        <Scripts>
+            <OnClick>
+                SortBags()
+            </OnClick>
+			<OnEnter>
+				GameTooltip:SetOwner(self);
+				GameTooltip:SetText(BAG_CLEANUP_BAGS);
+				GameTooltip:Show();
+			</OnEnter>
+            <OnLeave function="GameTooltip_Hide"></OnLeave>
+        </Scripts>
+    </Button>
+</Ui>

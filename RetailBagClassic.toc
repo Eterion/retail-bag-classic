@@ -1,12 +1,29 @@
 ## Interface: 11304
-## Title: RetailBagClassic
+## Title: Retail Bag Classic
 ## SavedVariablesPerCharacter: BankAutosortDisabled, BackpackAutosortDisabled
 ## Notes: Retail Bag for Classic
 ## Author: Eterion
 ## Version: 0.1.0
 
-# Bag Sort
-BagSort/BagSort.xml
+# API
+API/DepositReagentBank.lua
+API/SortBags.lua
+API/SortBankBags.lua
+
+# Bags
+Bags/Templates/FilterDropDownTemplate.xml
+Bags/Templates/FilterIconTemplate.xml
+Bags/Templates/PortraitButtonHighlightTemplate.xml
+Bags/BagItemSearchBox.xml
+Bags/BagItemAutoSortButton.xml
+Bags/BankItemSearchBox.xml
+Bags/BankItemAutoSortButton.xml
+Bags/Bags.lua
+Bags/Hooks.lua
+
+# Deposit Reagent Bank
+DepositReagentBank/BankDepositReagentsButton.xml
+DepositReagentBank/DepositReagentBank.lua
 
 # Free Slots
 FreeSlots/FreeSlots.lua
