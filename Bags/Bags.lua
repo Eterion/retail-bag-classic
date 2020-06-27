@@ -156,8 +156,8 @@ local function RegisterPortraitButtonEvents(PortraitButton)
 end
 
 -- Add frames to bags
-for i = 1, NUM_BAG_SLOTS + NUM_BANKBAGSLOTS do
-    local ContainerFrame = _G["ContainerFrame"..i]
+for i = 0, NUM_BAG_SLOTS + NUM_BANKBAGSLOTS do
+    local ContainerFrame = _G["ContainerFrame"..(i + 1)]
     RegisterPortraitButtonEvents(ContainerFrame.PortraitButton)
     ContainerFrame.PortraitButton:CreateTexture(nil, "OVERLAY", "PortraitButtonHighlightTemplate")
     CreateFrame("Button", nil, ContainerFrame, "FilterIconTemplate")
