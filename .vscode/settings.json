@@ -1,0 +1,22 @@
+{
+    "Lua.diagnostics.globals": [
+        "BAG_FILTER_ASSIGNED_TO",
+        "BAG_FILTER_ASSIGN_TO",
+        "BAG_FILTER_CLEANUP",
+        "BAG_FILTER_CONSUMABLES",
+        "BAG_FILTER_EQUIPMENT",
+        "BAG_FILTER_IGNORE",
+        "BAG_FILTER_JUNK",
+        "BAG_FILTER_TRADE_GOODS",
+        "CLICK_BAG_SETTINGS",
+        "LE_BAG_FILTER_FLAG_CONSUMABLES",
+        "LE_BAG_FILTER_FLAG_EQUIPMENT",
+        "LE_BAG_FILTER_FLAG_IGNORE_CLEANUP",
+        "LE_BAG_FILTER_FLAG_JUNK",
+        "LE_BAG_FILTER_FLAG_TRADE_GOODS",
+        "LE_ITEM_QUALITY_POOR",
+        "NUM_BAG_SLOTS",
+        "NUM_BANKBAGSLOTS",
+        "NUM_LE_BAG_FILTER_FLAGS"
+    ]
+}

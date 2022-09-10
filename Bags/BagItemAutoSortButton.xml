@@ -18,9 +18,9 @@
                 SortBags()
             </OnClick>
 			<OnEnter>
-				GameTooltip:SetOwner(self);
-				GameTooltip:SetText(BAG_CLEANUP_BAGS);
-				GameTooltip:Show();
+				GameTooltip:SetOwner(self)
+				GameTooltip:SetText(BAG_CLEANUP_BAGS)
+				GameTooltip:Show()
 			</OnEnter>
             <OnLeave function="GameTooltip_Hide"></OnLeave>
         </Scripts>

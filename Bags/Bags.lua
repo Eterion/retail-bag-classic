@@ -1,3 +1,5 @@
+local MIN_BAG_ID = 1; -- To include backpack, set to 0
+
 -- Filters
 BAG_FILTER_LABELS = {
     [LE_BAG_FILTER_FLAG_EQUIPMENT] = BAG_FILTER_EQUIPMENT,
@@ -12,6 +14,7 @@ BAG_FILTER_ICONS = {
 	[LE_BAG_FILTER_FLAG_CONSUMABLES] = "bags-icon-consumables",
 	[LE_BAG_FILTER_FLAG_TRADE_GOODS] = "bags-icon-tradegoods",
 }
+
 
 -- Initialize bag filter dropdown
 local function ContainerFrameFilterDropDown_Initialize(self)
@@ -70,48 +73,48 @@ local function ContainerFrameFilterDropDown_Initialize(self)
     end
 
     -- Group: CleanUp
-    local CleanUp = UIDropDownMenu_CreateInfo()
-    CleanUp.text = BAG_FILTER_CLEANUP
-    CleanUp.isTitle = 1
-    CleanUp.notCheckable = 1
-    UIDropDownMenu_AddButton(CleanUp)
+    -- local CleanUp = UIDropDownMenu_CreateInfo()
+    -- CleanUp.text = BAG_FILTER_CLEANUP
+    -- CleanUp.isTitle = 1
+    -- CleanUp.notCheckable = 1
+    -- UIDropDownMenu_AddButton(CleanUp)
 
     -- Ignore
-    local Ignore = UIDropDownMenu_CreateInfo()
-    Ignore.text = BAG_FILTER_IGNORE
-    Ignore.isNotRadio = true
-    Ignore.func = function (_, _, _, value)
-        if (id == -1) then
-            SetBankAutosortDisabled(not value)
-        elseif (id == 0) then
-            SetBackpackAutosortDisabled(not value)
-        elseif (id > NUM_BAG_SLOTS) then
-            SetBankBagSlotFlag(id - NUM_BAG_SLOTS, LE_BAG_FILTER_FLAG_IGNORE_CLEANUP, not value)
-        else
-            SetBagSlotFlag(id, LE_BAG_FILTER_FLAG_IGNORE_CLEANUP, not value)
-        end
-    end
-    if (id == -1) then
-        Ignore.checked = GetBankAutosortDisabled()
-    elseif (id == 0) then
-        Ignore.checked = GetBackpackAutosortDisabled()
-    elseif (id > NUM_BAG_SLOTS) then
-        Ignore.checked = GetBankBagSlotFlag(id - NUM_BAG_SLOTS, LE_BAG_FILTER_FLAG_IGNORE_CLEANUP)
-    else
-        Ignore.checked = GetBagSlotFlag(id, LE_BAG_FILTER_FLAG_IGNORE_CLEANUP)
-    end
-    UIDropDownMenu_AddButton(Ignore)
+    -- local Ignore = UIDropDownMenu_CreateInfo()
+    -- Ignore.text = BAG_FILTER_IGNORE
+    -- Ignore.isNotRadio = true
+    -- Ignore.func = function (_, _, _, value)
+    --     if (id == -1) then
+    --         SetBankAutosortDisabled(not value)
+    --     elseif (id == 0) then
+    --         SetBackpackAutosortDisabled(not value)
+    --     elseif (id > NUM_BAG_SLOTS) then
+    --         SetBankBagSlotFlag(id - NUM_BAG_SLOTS, LE_BAG_FILTER_FLAG_IGNORE_CLEANUP, not value)
+    --     else
+    --         SetBagSlotFlag(id, LE_BAG_FILTER_FLAG_IGNORE_CLEANUP, not value)
+    --     end
+    -- end
+    -- if (id == -1) then
+    --     Ignore.checked = GetBankAutosortDisabled()
+    -- elseif (id == 0) then
+    --     Ignore.checked = GetBackpackAutosortDisabled()
+    -- elseif (id > NUM_BAG_SLOTS) then
+    --     Ignore.checked = GetBankBagSlotFlag(id - NUM_BAG_SLOTS, LE_BAG_FILTER_FLAG_IGNORE_CLEANUP)
+    -- else
+    --     Ignore.checked = GetBagSlotFlag(id, LE_BAG_FILTER_FLAG_IGNORE_CLEANUP)
+    -- end
+    -- UIDropDownMenu_AddButton(Ignore)
 end
 
 -- Update tooltip and show portrait highlight
 local function ContainerFramePortraitButton_OnEnter(self)
     local parent = self:GetParent()
     local id = parent:GetID()
-    if (id < 0) then
+    if (id < MIN_BAG_ID) then
         return
     end
     self.Highlight:Show()
-    if (id > 0) then
+    if (id > MIN_BAG_ID) then
         if (parent.localFlag and BAG_FILTER_LABELS[parent.localFlag]) then
             GameTooltip:AddLine(BAG_FILTER_ASSIGNED_TO:format(BAG_FILTER_LABELS[parent.localFlag]))
         elseif (not parent.localFlag) then
@@ -131,7 +134,7 @@ end
 local function ContainerFramePortraitButton_OnLeave(self)
     local parent = self:GetParent()
     local id = parent:GetID()
-    if (id < 0) then
+    if (id < MIN_BAG_ID) then
         return
     end
     self.Highlight:Hide()
@@ -141,7 +144,7 @@ end
 local function ContainerFramePortraitButton_OnClick(self)
     local parent = self:GetParent()
     local id = parent:GetID()
-    if (id >= 0) then
+    if (id >= MIN_BAG_ID) then
         local parent = self:GetParent()
         PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
         ToggleDropDownMenu(1, nil, parent.FilterDropDown, self:GetName(), 0, 0)
